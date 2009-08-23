@@ -1,35 +1,56 @@
-require "rake"
-require "rake/rdoctask"
+require 'rubygems'
+require 'rake'
 
-desc "Generate RDoc documentation for SlideShare library"
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = "doc"
-  rdoc.title = "SlideShare API Ruby Library"
-  rdoc.options << "--line-numbers" << "--inline-source"
-  rdoc.rdoc_files.include("README")
-  rdoc.rdoc_files.include("lib/**/*.rb")
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    gem.name = "slideshare"
+    gem.summary = %Q{TODO}
+    gem.email = "andy@shenie.info"
+    gem.homepage = "http://github.com/shenie/slideshare"
+    gem.authors = ["Andy Shen"]
+    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+  end
+
+rescue LoadError
+  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+end
+
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/*_test.rb'
+  test.verbose = true
 end
 
 begin
-  require 'spec'
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |test|
+    test.libs << 'test'
+    test.pattern = 'test/**/*_test.rb'
+    test.verbose = true
+  end
 rescue LoadError
-  require 'rubygems'
-  require 'spec'
-end
-begin
-  require 'spec/rake/spectask'
-rescue LoadError
-  puts <<-EOS
-   To use rspec for testing you must install rspec gem:
-   gem install rspec
-EOS
-  exit 0
+  task :rcov do
+    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+  end
 end
 
-task :default => :spec
 
-desc "Run the specs for SlideShare library"
-Spec::Rake::SpecTask.new do |t|
-  t.spec_opts = ["--options", "spec/spec.opts"]
-  t.spec_files = FileList["spec/**/*_spec.rb"]
+task :default => :test
+
+require 'rake/rdoctask'
+Rake::RDocTask.new do |rdoc|
+  if File.exist?('VERSION.yml')
+    config = YAML.load(File.read('VERSION.yml'))
+    version = "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
+  else
+    version = ""
+  end
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "slideshare #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
