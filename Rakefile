@@ -1,5 +1,8 @@
 require 'rubygems'
 require 'rake'
+require 'spec/rake/spectask'
+
+Spec::Rake::SpecTask.new(:spec)
 
 begin
   require 'jeweler'
@@ -13,7 +16,7 @@ begin
     gem.add_dependency('httparty', '>= 0.4.3')
     gem.add_dependency('curb', '>= 0.1.4')
   end
-  
+
   Jeweler::GemcutterTasks.new
 
 rescue LoadError
