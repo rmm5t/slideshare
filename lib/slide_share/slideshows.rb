@@ -35,21 +35,22 @@ module SlideShare
         Curl::PostField.content(key.to_s, value)
       end
       params << Curl::PostField.file("slideshow_srcfile", File.expand_path(filename))
-      
+
       curl = Curl::Easy.new("#{SlideShare::Base.base_uri}/upload_slideshow") do |c|
         c.multipart_form_post = true
       end
       curl.http_post(*params)
-      
-      body = ToHashParser.from_xml(curl.body_str)
+
+      body = Crack::XML.parse(curl.body_str)
+
       response = base.send(:catch_errors, body)
       # I'd presume the id returned was an integer
       response["SlideShowUploaded"]["SlideShowID"].to_i
     end
-    
+
     # Returns hash of attributes for slideshow if successful or raises an appropriate
     # exception if not. Takes the following options:
-    # 
+    #
     # * <tt>:username</tt> - SlideShare username of the user _making_ the request
     # * <tt>:password</tt> - SlideShare password of the user _making_ the request
     # * <tt>:detailed</tt> - Set to <tt>true</tt> to return additional, detailed information
