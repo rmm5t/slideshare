@@ -4,12 +4,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{slideshare}
-  s.version = "0.2.1"
+  s.name = %q{rmm5t-slideshare}
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Saiku.es", "Russell Norris", "Andy Shen"]
-  s.date = %q{2009-10-30}
+  s.authors = ["Saiku.es", "Russell Norris", "Andy Shen", "Ryan McGeary"]
+  s.date = %q{2009-12-30}
   s.email = %q{andy@shenie.info}
   s.extra_rdoc_files = [
     "README.rdoc"
@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
      "lib/slide_share/errors.rb",
      "lib/slide_share/slideshows.rb",
      "lib/slideshare.rb",
-     "slideshare.gemspec",
      "spec/fixtures/config.yml",
      "spec/fixtures/config_missing_api_key.yml",
      "spec/fixtures/config_missing_shared_secret.yml",
@@ -44,7 +43,7 @@ Gem::Specification.new do |s|
      "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/shenie/slideshare}
+  s.homepage = %q{http://github.com/rmm5t/slideshare}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}

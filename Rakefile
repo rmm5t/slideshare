@@ -7,11 +7,11 @@ Spec::Rake::SpecTask.new(:spec)
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "slideshare"
+    gem.name = "rmm5t-slideshare"
     gem.summary = %Q{Ruby interface for SlideShare API}
     gem.email = "andy@shenie.info"
-    gem.homepage = "http://github.com/shenie/slideshare"
-    gem.authors = ["Saiku.es", "Russell Norris", "Andy Shen"]
+    gem.homepage = "http://github.com/rmm5t/slideshare"
+    gem.authors = ["Saiku.es", "Russell Norris", "Andy Shen", "Ryan McGeary"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
     gem.add_dependency('httparty', '>= 0.4.3')
     gem.add_dependency('curb', '>= 0.1.4')
